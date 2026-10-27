@@ -38,14 +38,12 @@ function main(config) {
         "故障转移",
         "自动选择",
         "全球手动",
-        "DolaAI",
         "香港策略",
         "台湾策略",
         "狮城策略",
         "日本策略",
         "美国策略",
         "其它地区",
-        "DIRECT"
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
