@@ -43,7 +43,7 @@ function main(config) {
         "狮城策略",
         "日本策略",
         "美国策略",
-        "其它地区",
+        "其它地区"
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
