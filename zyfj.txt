@@ -199,9 +199,7 @@ function main(config) {
         "日本策略",
         "台湾策略",
         "韩国策略",
-        "香港策略",
         "其它地区",
-        "人工智能"
       ],
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
