@@ -73,6 +73,32 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png"
     },
     {
+      name: "香港策略",
+      type: "select",
+      "include-all": true,
+      filter: filterHK,
+      proxies: ["香港-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png"
+    },
+    {
+      name: "台湾策略",
+      type: "select",
+      "include-all": true,
+      filter: filterTW,
+      proxies: ["台湾-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
+    },
+    {
       name: "狮城策略",
       type: "select",
       "include-all": true,
@@ -99,19 +125,6 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png"
     },
     {
-      name: "台湾策略",
-      type: "select",
-      "include-all": true,
-      filter: filterTW,
-      proxies: ["台湾-负载均衡"],
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
-    },
-    {
       name: "美国策略",
       type: "select",
       "include-all": true,
@@ -123,19 +136,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png"
-    },
-    {
-      name: "香港策略",
-      type: "select",
-      "include-all": true,
-      filter: filterHK,
-      proxies: ["香港-负载均衡"],
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png"
     },
     {
       name: "其它地区",
