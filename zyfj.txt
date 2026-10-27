@@ -586,4 +586,5 @@ function main(config) {
     "MATCH,漏网之鱼"
   ];
 
-  return
+  return config;
+}
