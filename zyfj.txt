@@ -1,0 +1,572 @@
+function main(config) {
+  // ========== 地区筛选正则 ==========
+  const filterHK =
+    "^(?i)(?=.*(香港|港深|深港|沪港|广港|陆港|(^|[^a-zA-Z])(hk|hkg)([^a-zA-Z]|$)|hongkong|hong kong|🇭🇰))(?!.*(排除)).*$";
+  const filterTW =
+    "^(?i)(?=.*(台湾|台北|台中|台南|台东|湾湾|(^|[^a-zA-Z])(tw|tpe|khh|tsa)([^a-zA-Z]|$)|taiwan|taipei|🇹🇼|🇼🇸))(?!.*(排除)).*$";
+  const filterJP =
+    "^(?i)(?=.*(日本|东京|大阪|京都|神奈川|琦玉|埼玉|(^|[^a-zA-Z])(jp|nrt|hnd|kix|cts|fuk)([^a-zA-Z]|$)|japan|tokyo|🇯🇵))(?!.*(排除)).*$";
+  const filterSG =
+    "^(?i)(?=.*(新加坡|坡县|坡|狮城|獅城|(^|[^a-zA-Z])(sg|sin|xsp)([^a-zA-Z]|$)|singapore|🇸🇬))(?!.*(排除)).*$";
+  const filterKR =
+    "^(?i)(?=.*(韩国|韓國|首尔|首爾|南朝鲜|南朝鮮|(^|[^a-zA-Z])(kr|icn|gmp|pus)([^a-zA-Z]|$)|korea|seoul|🇰🇷))(?!.*(排除)).*$";
+  const filterUS =
+    "^(?i)(?=.*(美国|美东|美西|美中|美南|美港|美日|中美|美专|(^|[^a-zA-Z])(us|usa|lax|sfo|jfk|sjc)([^a-zA-Z]|$)|america|united states|🇺🇸))(?!.*(排除)).*$";
+  const filterOther =
+    "^(?i)(?!.*(香港|新加坡|狮城|日本|美国|韩国|朝鲜|台湾|港|新|日|美|韩|台|🇭🇰|🇸🇬|🇯🇵|🇺🇸|🇰🇷|🇹🇼|(^|[^a-zA-Z])(hk|hkg|sg|sin|jp|us|kr|tw)([^a-zA-Z]|$))).+$";
+  const filterAI =
+    "^(?i)(?!.*(群|官|客|防|阅|群组|我的|剩余|套餐|到期|续费|导航|域名|未知|频道|时间|有效|禁止|邮箱|发布|节点|中国|邀请|返利|循环|官网|客服|网址|获取|订阅|流量|机场|下次|版本|官址|备用|过期|已用|联系|工单|贩卖|通知|倒卖|防止|国内|地址|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|🇭🇰|HK|CN|GB|Date|Day)).*$";
+  const filterDolaAI =
+    "^(?i)(?!.*(群|官|客|防|阅|群组|我的|剩余|套餐|到期|续费|导航|域名|未知|频道|时间|有效|禁止|邮箱|发布|节点|中国|美国|美东|美西|美中|美南|美港|美日|中美|美专|邀请|返利|循环|官网|客服|网址|获取|订阅|流量|机场|下次|版本|官址|备用|过期|已用|联系|工单|贩卖|通知|倒卖|防止|国内|地址|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|🇭🇰|🇺🇸|HK|CN|GB|Date|Day)).*$";
+
+  // ========== 策略组 ==========
+  config["proxy-groups"] = [
+    {
+      name: "故障转移",
+      type: "fallback",
+      "include-all": true,
+      proxies: ["狮城策略","日本策略","台湾策略","韩国策略","美国策略","香港策略","其它地区"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
+    },
+    {
+      name: "总策略组",
+      type: "select",
+      proxies: [
+        "故障转移",
+        "自动选择",
+        "全球手动",
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "美国策略",
+        "香港策略",
+        "其它地区",
+        "DIRECT"
+      ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    },
+    
+    {
+      name: "自动选择",
+      type: "url-test",
+      "include-all": true,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 150,
+      timeout: 2000,
+      lazy: true,
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
+    },
+    {
+      name: "全球手动",
+      type: "select",
+      "include-all": true,
+      proxies: [
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "美国策略",
+        "香港策略",
+        "其它地区"
+      ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png"
+    },
+    // ===== 🎯 地区手动选择分组 =====
+    {
+      name: "狮城策略",
+      type: "select",
+      "include-all": true,
+      filter: filterSG,
+      proxies: ["狮城-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png"
+    },
+    {
+      name: "日本策略",
+      type: "select",
+      "include-all": true,
+      filter: filterJP,
+      proxies: ["日本-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png"
+    },
+    {
+      name: "台湾策略",
+      type: "select",
+      "include-all": true,
+      filter: filterTW,
+      proxies: ["台湾-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
+    },
+    {
+      name: "韩国策略",
+      type: "select",
+      "include-all": true,
+      filter: filterKR,
+      proxies: ["韩国-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png"
+    },
+    {
+      name: "美国策略",
+      type: "select",
+      "include-all": true,
+      filter: filterUS,
+      proxies: ["美国-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png"
+    },
+    {
+      name: "香港策略",
+      type: "select",
+      "include-all": true,
+      filter: filterHK,
+      proxies: ["香港-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png"
+    },
+    {
+      name: "其它地区",
+      type: "select",
+      "include-all": true,
+      filter: filterOther,
+      proxies: ["其它地区-负载均衡"],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    },
+    {
+      name: "人工智能",
+      type: "fallback",
+      "include-all": false,
+      proxies: [
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "美国策略",
+        "其它地区"
+      ],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png"
+    },
+    {
+      name: "DolaAI",
+      type: "fallback",
+      "include-all": false,
+      proxies: [
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "其它地区"
+      ],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/AI.png"
+    },
+    {
+      name: "下载专用",
+      type: "load-balance",
+      strategy: "round-robin",
+      "include-all": true,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 60,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Download.png"
+    },
+    {
+      name: "国内流量",
+      type: "select",
+      proxies: ["DIRECT"],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png"
+    },
+    {
+      name: "广告拦截",
+      type: "select",
+      proxies: ["REJECT-DROP", "REJECT", "DIRECT"],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Reject.png"
+    },
+    {
+      name: "微软服务",
+      type: "select",
+      proxies: [
+        "DIRECT",
+        "故障转移",
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "美国策略",
+        "香港策略",
+        "其它地区"
+      ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png"
+    },
+    {
+      name: "国外流量",
+      type: "select",
+      proxies: [
+        "故障转移",
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "美国策略",
+        "香港策略",
+        "其它地区"
+      ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    },
+    {
+      name: "漏网之鱼",
+      type: "select",
+      proxies: [
+        "故障转移",
+        "狮城策略",
+        "日本策略",
+        "台湾策略",
+        "韩国策略",
+        "美国策略",
+        "香港策略",
+        "其它地区",
+        "DIRECT"
+      ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png"
+    },
+    // ===== 🔒 子负载均衡组（不显示在顶层） =====
+    {
+      name: "狮城-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterSG,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png"
+    },
+    {
+      name: "日本-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterJP,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png"
+    },
+    {
+      name: "台湾-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterTW,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
+    },
+    {
+      name: "韩国-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterKR,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png"
+    },
+    {
+      name: "美国-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterUS,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png"
+    },
+    {
+      name: "香港-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterHK,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png"
+    },
+    {
+      name: "其它地区-负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterOther,
+      proxies: [],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    }
+  ];
+
+  // ========== DNS与嗅探 ==========
+  config.dns = {
+    enable: true,
+    ipv6: false,
+    "enhanced-mode": "fake-ip",
+    "fake-ip-range": "198.18.0.1/16",
+    "default-nameserver": ["119.29.29.29", "180.184.1.1", "223.5.5.5"],
+    nameserver: ["https://dns.alidns.com/dns-query", "https://doh.pub/dns-query"],
+    "fake-ip-filter": [
+      "+.lan",
+      "*.local",
+      "+.gstatic.com",
+      "+.miwifi.com",
+      "+.market.xiaomi.com",
+      "+.push.apple.com"
+    ]
+  };
+  config.sniffer = {
+    enable: true,
+    sniff: {
+      HTTP: { ports: [80, "8080-8880"], "override-destination": true },
+      TLS: { ports: [443, 8443] },
+      QUIC: { ports: [443, 8443] }
+    },
+    "skip-domain": ["Mijia Cloud", "+.push.apple.com"]
+  };
+  config.tun = {
+    enable: false,
+    stack: "mixed",
+    "dns-hijack": ["any:53", "tcp://any:53"],
+    "auto-route": true,
+    "auto-redirect": true,
+    "auto-detect-interface": true
+  };
+
+  // ========== 规则集源 ==========
+  const domainProvider = (url) => ({
+    type: "http",
+    behavior: "domain",
+    format: "mrs",
+    interval: 86400,
+    url
+  });
+  const ipProvider = (url) => ({
+    type: "http",
+    behavior: "ipcidr",
+    format: "mrs",
+    interval: 86400,
+    url
+  });
+  const base = "https://github.com/666OS/rules/raw/release/mihomo/";
+  config["rule-providers"] = {
+    Tracking: domainProvider(base + "domain/Tracking.mrs"),
+    Advertising: domainProvider(base + "domain/Advertising.mrs"),
+    Private: domainProvider(base + "domain/Private.mrs"),
+    Apple: domainProvider(base + "domain/Apple.mrs"),
+    Telegram: domainProvider(base + "domain/Telegram.mrs"),
+    TM: domainProvider(base + "domain/TM.mrs"),
+    SocialMedia: domainProvider(base + "domain/SocialMedia.mrs"),
+    AI: domainProvider(base + "domain/AI.mrs"),
+    Dev: domainProvider(base + "domain/Dev.mrs"),
+    YouTube: domainProvider(base + "domain/YouTube.mrs"),
+    Netflix: domainProvider(base + "domain/Netflix.mrs"),
+    Spotify: domainProvider(base + "domain/Spotify.mrs"),
+    Disney: domainProvider(base + "domain/Disney.mrs"),
+    Emby: domainProvider(base + "domain/Emby.mrs"),
+    Streaming: domainProvider(base + "domain/Streaming.mrs"),
+    Proxy: domainProvider(base + "domain/Proxy.mrs"),
+    China: domainProvider(base + "domain/China.mrs"),
+    Speedtest: domainProvider(base + "domain/Speedtest.mrs"),
+    Games: domainProvider(base + "domain/Games.mrs"),
+    Crypto: domainProvider(base + "domain/Crypto.mrs"),
+    Google: domainProvider(base + "domain/Google.mrs"),
+    Microsoft: domainProvider(base + "domain/Microsoft.mrs"),
+    Facebook: domainProvider(base + "domain/Facebook.mrs"),
+    PrivateIP: ipProvider(base + "ip/Private.mrs"),
+    TelegramIP: ipProvider(base + "ip/Telegram.mrs"),
+    SocialMediaIP: ipProvider(base + "ip/SocialMedia.mrs"),
+    AIIP: ipProvider(base + "ip/AI.mrs"),
+    NetflixIP: ipProvider(base + "ip/Netflix.mrs"),
+    EmbyIP: ipProvider(base + "ip/Emby.mrs"),
+    StreamingIP: ipProvider(base + "ip/Streaming.mrs"),
+    ProxyIP: ipProvider(base + "ip/Proxy.mrs"),
+    ChinaIP: ipProvider(base + "ip/China.mrs"),
+    GoogleIP: ipProvider(base + "ip/Google.mrs")
+  };
+
+  // ========== 规则区 ==========
+  config.rules = [
+    "DOMAIN-SUFFIX,music.163.com,国内流量",
+    "DOMAIN-SUFFIX,music.126.net,国内流量",
+    "DOMAIN-SUFFIX,pan.baidu.com,国内流量",
+    "DOMAIN-SUFFIX,baidupcs.com,国内流量",
+    "DOMAIN-SUFFIX,aliyundrive.com,国内流量",
+    "DOMAIN-SUFFIX,alipan.com,国内流量",
+    "DOMAIN-SUFFIX,quark.cn,国内流量",
+    "DOMAIN-SUFFIX,xunlei.com,国内流量",
+    "DOMAIN-SUFFIX,lanzou.com,国内流量",
+    "DOMAIN-SUFFIX,woozooo.com,国内流量",
+    "DOMAIN-SUFFIX,ctfile.com,国内流量",
+    "DOMAIN-SUFFIX,123pan.com,国内流量",
+    "DOMAIN-SUFFIX,jianguoyun.com,国内流量",
+    "DOMAIN-SUFFIX,teambition.com,国内流量",
+    "DOMAIN-SUFFIX,github.com,下载专用",
+    "DOMAIN-SUFFIX,githubusercontent.com,下载专用",
+    "DOMAIN-SUFFIX,githubassets.com,下载专用",
+    "DOMAIN-SUFFIX,tuna.tsinghua.edu.cn,下载专用",
+    "DOMAIN-SUFFIX,mirrors.aliyun.com,下载专用",
+    "DOMAIN-SUFFIX,mirrors.cloud.tencent.com,下载专用",
+    "DOMAIN-SUFFIX,kernel.org,下载专用",
+    "DOMAIN-SUFFIX,ubuntu.com,下载专用",
+    "DOMAIN-SUFFIX,debian.org,下载专用",
+    "DOMAIN-SUFFIX,fedoraproject.org,下载专用",
+    "DOMAIN-SUFFIX,archlinux.org,下载专用",
+    "DOMAIN-SUFFIX,raspberrypi.com,下载专用",
+    "DOMAIN-SUFFIX,openwrt.org,下载专用",
+    "DOMAIN-SUFFIX,archive.org,下载专用",
+    "DOMAIN-SUFFIX,docker.com,下载专用",
+    "DOMAIN-SUFFIX,docker.io,下载专用",
+    "DOMAIN-SUFFIX,npmjs.org,下载专用",
+    "DOMAIN-SUFFIX,pypi.org,下载专用",
+    "DOMAIN-SUFFIX,python.org,下载专用",
+    "DOMAIN-SUFFIX,nodejs.org,下载专用",
+    "DOMAIN-SUFFIX,rust-lang.org,下载专用",
+    "DOMAIN-SUFFIX,go.dev,下载专用",
+    "DOMAIN-SUFFIX,jetbrains.com,下载专用",
+    "DOMAIN-SUFFIX,gitlab.com,下载专用",
+    "DOMAIN-SUFFIX,bitbucket.org,下载专用",
+    "DOMAIN-SUFFIX,dropbox.com,下载专用",
+    "DOMAIN-SUFFIX,box.com,下载专用",
+    "DOMAIN-SUFFIX,onedrive.com,下载专用",
+    "DOMAIN-SUFFIX,1drv.ms,下载专用",
+    "DOMAIN-SUFFIX,googleapis.com,下载专用",
+    "DOMAIN-SUFFIX,googledrive.com,下载专用",
+    "DOMAIN-SUFFIX,drive.google.com,下载专用",
+    "DOMAIN-SUFFIX,mediafire.com,下载专用",
+    "DOMAIN-SUFFIX,steampowered.com,下载专用",
+    "DOMAIN-SUFFIX,steamcontent.com,下载专用",
+    "DOMAIN-SUFFIX,epicgames.com,下载专用",
+    "DOMAIN-SUFFIX,blizzard.com,下载专用",
+    "DOMAIN-SUFFIX,battle.net,下载专用",
+    "DOMAIN-SUFFIX,nvidia.com,下载专用",
+    "DOMAIN-SUFFIX,unsplash.com,下载专用",
+    "DOMAIN-SUFFIX,pixabay.com,下载专用",
+    "DOMAIN-SUFFIX,pexels.com,下载专用",
+    "DOMAIN-KEYWORD,1fichier,下载专用",
+    "DOMAIN-SUFFIX,bilibili.com,国内流量",
+    "DOMAIN-SUFFIX,bilivideo.com,国内流量",
+    "DOMAIN-SUFFIX,hdslb.com,国内流量",
+    "DOMAIN-SUFFIX,biliapi.net,国内流量",
+    "DOMAIN-SUFFIX,biliapi.com,国内流量",
+    "DOMAIN-SUFFIX,baidu.com,国内流量",
+    "DOMAIN-KEYWORD,gamer520,国内流量",
+    "DOMAIN-KEYWORD,sheapi,国内流量",
+    "DOMAIN-KEYWORD,skidrowreloaded,国内流量",
+    "DOMAIN-KEYWORD,ali213,国内流量",
+    "DOMAIN-KEYWORD,leeapk,国内流量",
+    "DOMAIN-KEYWORD,cfsub,国内流量",
+    "DOMAIN-KEYWORD,youtube,总策略组",
+    "DOMAIN-KEYWORD,dola,DolaAI",
+    "RULE-SET,Tracking,广告拦截",
+    "RULE-SET,Advertising,广告拦截",
+    "RULE-SET,Private,国内流量",
+    "RULE-SET,PrivateIP,国内流量,no-resolve",
+    "RULE-SET,Speedtest,自动选择",
+    "RULE-SET,TM,自动选择",
+    "RULE-SET,Telegram,自动选择",
+    "RULE-SET,TelegramIP,自动选择,no-resolve",
+    "RULE-SET,SocialMedia,自动选择",
+    "RULE-SET,SocialMediaIP,自动选择,no-resolve",
+    "RULE-SET,AI,人工智能",
+    "RULE-SET,AIIP,人工智能,no-resolve",
+    "RULE-SET,Dev,自动选择",
+    "RULE-SET,Streaming,自动选择",
+    "RULE-SET,StreamingIP,自动选择,no-resolve",
+    "RULE-SET,Games,自动选择",
+    "RULE-SET,Crypto,自动选择",
+    "RULE-SET,Google,自动选择",
+    "RULE-SET,GoogleIP,自动选择,no-resolve",
+    "RULE-SET,Microsoft,微软服务",
+    "RULE-SET,Facebook,自动选择",
+    "RULE-SET,Apple,自动选择",
+    "RULE-SET,Proxy,国外流量",
+    "RULE-SET,ProxyIP,国外流量,no-resolve",
+    "RULE-SET,China,国内流量",
+    "RULE-SET,ChinaIP,国内流量,no-resolve",
+    "MATCH,漏网之鱼"
+  ];
+
+  return config;
+}
