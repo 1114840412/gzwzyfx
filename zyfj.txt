@@ -8,8 +8,6 @@ function main(config) {
     "^(?i)(?=.*(日本|东京|大阪|京都|神奈川|琦玉|埼玉|(^|[^a-zA-Z])(jp|nrt|hnd|kix|cts|fuk)([^a-zA-Z]|$)|japan|tokyo|🇯🇵))(?!.*(排除)).*$";
   const filterSG =
     "^(?i)(?=.*(新加坡|坡县|坡|狮城|獅城|(^|[^a-zA-Z])(sg|sin|xsp)([^a-zA-Z]|$)|singapore|🇸🇬))(?!.*(排除)).*$";
-  const filterKR =
-    "^(?i)(?=.*(韩国|韓國|首尔|首爾|南朝鲜|南朝鮮|(^|[^a-zA-Z])(kr|icn|gmp|pus)([^a-zA-Z]|$)|korea|seoul|🇰🇷))(?!.*(排除)).*$";
   const filterUS =
     "^(?i)(?=.*(美国|美东|美西|美中|美南|美港|美日|中美|美专|(^|[^a-zA-Z])(us|usa|lax|sfo|jfk|sjc)([^a-zA-Z]|$)|america|united states|🇺🇸))(?!.*(排除)).*$";
   const filterOther =
@@ -25,7 +23,7 @@ function main(config) {
       name: "故障转移",
       type: "fallback",
       "include-all": true,
-      proxies: ["狮城策略","日本策略","台湾策略","韩国策略","美国策略","香港策略","其它地区"],
+      proxies: ["香港策略","台湾策略","狮城策略","日本策略","美国策略","其它地区"],
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
@@ -41,12 +39,11 @@ function main(config) {
         "自动选择",
         "全球手动",
         "DolaAI",
+        "香港策略",
+        "台湾策略",
         "狮城策略",
         "日本策略",
-        "台湾策略",
-        "韩国策略",
         "美国策略",
-        "香港策略",
         "其它地区",
         "DIRECT"
       ],
@@ -68,15 +65,12 @@ function main(config) {
       type: "select",
       "include-all": true,
       proxies: [
-        "DolaAI",
-        "人工智能",
+        "香港策略",
+        "台湾策略",
         "狮城策略",
         "日本策略",
-        "台湾策略",
-        "韩国策略",
         "美国策略",
-        "香港策略",
-        "其它地区"
+        "其它地区",
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Clubhouse.png"
     },
@@ -118,19 +112,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
-    },
-    {
-      name: "韩国策略",
-      type: "select",
-      "include-all": true,
-      filter: filterKR,
-      proxies: ["韩国-负载均衡"],
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png"
     },
     {
       name: "美国策略",
@@ -179,7 +160,6 @@ function main(config) {
         "狮城策略",
         "日本策略",
         "台湾策略",
-        "韩国策略",
         "美国策略",
         "其它地区"
       ],
@@ -198,7 +178,6 @@ function main(config) {
         "狮城策略",
         "日本策略",
         "台湾策略",
-        "韩国策略",
         "其它地区",
       ],
       url: "http://www.gstatic.com/generate_204",
@@ -241,7 +220,6 @@ function main(config) {
         "狮城策略",
         "日本策略",
         "台湾策略",
-        "韩国策略",
         "美国策略",
         "香港策略",
         "其它地区"
@@ -255,13 +233,12 @@ function main(config) {
         "故障转移",
         "DolaAI",
         "人工智能",
+        "香港策略",
+        "台湾策略",
         "狮城策略",
         "日本策略",
-        "台湾策略",
-        "韩国策略",
         "美国策略",
-        "香港策略",
-        "其它地区"
+        "其它地区",
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
@@ -272,12 +249,11 @@ function main(config) {
         "故障转移",
         "DolaAI",
         "人工智能",
+        "香港策略",
+        "台湾策略",
         "狮城策略",
         "日本策略",
-        "台湾策略",
-        "韩国策略",
         "美国策略",
-        "香港策略",
         "其它地区",
         "DIRECT"
       ],
@@ -324,20 +300,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
-    },
-    {
-      name: "韩国-负载均衡",
-      type: "load-balance",
-      strategy: "consistent-hashing",
-      "include-all": true,
-      filter: filterKR,
-      proxies: [],
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Korea.png"
     },
     {
       name: "美国-负载均衡",
