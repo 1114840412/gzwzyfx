@@ -476,7 +476,7 @@ function main(config) {
     GoogleIP: ipProvider(base + "ip/Google.mrs")
   };
 
-  // ========== 规则区（已修复语法错误） ==========
+  // ========== 规则区 ✅ 已修复：最后一项无逗号 ==========
   config.rules = [
     "DOMAIN-SUFFIX,music.163.com,国内流量",
     "DOMAIN-SUFFIX,music.126.net,国内流量",
@@ -549,7 +549,7 @@ function main(config) {
     "DOMAIN-KEYWORD,cfsub,国内流量",
     "DOMAIN-KEYWORD,youtube,总策略组",
 
-    // ========== ✅ DolaAI + Cici 全部规则 ==========
+    // ========== DolaAI + Cici 规则 ==========
     "DOMAIN-SUFFIX,dolaai.com,DolaAI",
     "DOMAIN-SUFFIX,dola.ai,DolaAI",
     "DOMAIN-SUFFIX,cici-ai.com,DolaAI",
@@ -586,4 +586,4 @@ function main(config) {
     "MATCH,漏网之鱼"
   ];
 
-  return config
+  return
