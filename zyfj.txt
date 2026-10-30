@@ -34,6 +34,7 @@ function main(config) {
     {
       name: "总策略组",
       type: "select",
+      "include-all": true,
       proxies: [
         "故障转移",
         "自动选择",
