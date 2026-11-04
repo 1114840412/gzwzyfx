@@ -139,14 +139,8 @@ function main(config) {
     {
       name: "人工智能",
       type: "fallback",
-      "include-all": false,
-      proxies: [
-        "狮城策略",
-        "日本策略",
-        "台湾策略",
-        "美国策略",
-        "其它地区"
-      ],
+      "include-all": true,
+      filter: filterAI,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
@@ -157,13 +151,8 @@ function main(config) {
     {
       name: "DolaAI",
       type: "fallback",
-      "include-all": false,
-      proxies: [
-        "狮城策略",
-        "日本策略",
-        "台湾策略",
-        "其它地区",
-      ],
+      "include-all": true,
+      filter: filterDolaAI,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
