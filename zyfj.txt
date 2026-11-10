@@ -229,23 +229,6 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
     {
-      name: "漏网之鱼",
-      type: "select",
-      proxies: [
-        "故障转移",
-        "DolaAI",
-        "人工智能",
-        "香港策略",
-        "台湾策略",
-        "狮城策略",
-        "日本策略",
-        "美国策略",
-        "其它地区",
-        "DIRECT"
-      ],
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Final.png"
-    },
-    {
       name: "狮城-负载均衡",
       type: "load-balance",
       strategy: "consistent-hashing",
@@ -505,29 +488,29 @@ function main(config) {
     "RULE-SET,Advertising,广告拦截",
     "RULE-SET,Private,国内流量",
     "RULE-SET,PrivateIP,国内流量,no-resolve",
-    "RULE-SET,Speedtest,自动选择",
-    "RULE-SET,TM,自动选择",
-    "RULE-SET,Telegram,自动选择",
-    "RULE-SET,TelegramIP,自动选择,no-resolve",
-    "RULE-SET,SocialMedia,自动选择",
-    "RULE-SET,SocialMediaIP,自动选择,no-resolve",
+    "RULE-SET,Speedtest,总策略组",
+    "RULE-SET,TM,总策略组",
+    "RULE-SET,Telegram,总策略组",
+    "RULE-SET,TelegramIP,总策略组,no-resolve",
+    "RULE-SET,SocialMedia,总策略组",
+    "RULE-SET,SocialMediaIP,总策略组,no-resolve",
     "RULE-SET,AI,人工智能",
     "RULE-SET,AIIP,人工智能,no-resolve",
-    "RULE-SET,Dev,自动选择",
-    "RULE-SET,Streaming,自动选择",
-    "RULE-SET,StreamingIP,自动选择,no-resolve",
-    "RULE-SET,Games,自动选择",
+    "RULE-SET,Dev,总策略组",
+    "RULE-SET,Streaming,总策略组",
+    "RULE-SET,StreamingIP,总策略组,no-resolve",
+    "RULE-SET,Games,总策略组",
     "RULE-SET,Crypto,自动选择",
-    "RULE-SET,Google,自动选择",
-    "RULE-SET,GoogleIP,自动选择,no-resolve",
+    "RULE-SET,Google,总策略组",
+    "RULE-SET,GoogleIP,总策略组,no-resolve",
     "RULE-SET,Microsoft,微软服务",
-    "RULE-SET,Facebook,自动选择",
-    "RULE-SET,Apple,自动选择",
+    "RULE-SET,Facebook,总策略组",
+    "RULE-SET,Apple,总策略组",
     "RULE-SET,Proxy,国外流量",
     "RULE-SET,ProxyIP,国外流量,no-resolve",
     "RULE-SET,China,国内流量",
     "RULE-SET,ChinaIP,国内流量,no-resolve",
-    "MATCH,漏网之鱼"
+    "MATCH,总策略组"
   ];
 return config;
 }
