@@ -491,6 +491,7 @@ function main(config) {
     "DOMAIN-KEYWORD,sheapi,国内流量",
     "DOMAIN-KEYWORD,skidrowreloaded,国内流量",
     "DOMAIN-KEYWORD,ali213,国内流量",
+    "DOMAIN-KEYWORD,musicai.ai,国内流量",
     "DOMAIN-KEYWORD,leeapk,国内流量",
     "DOMAIN-KEYWORD,cfsub,国内流量",
     "DOMAIN-KEYWORD,youtube,总策略组",
