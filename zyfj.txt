@@ -20,18 +20,6 @@ function main(config) {
   // ========== 策略组 ==========
   config["proxy-groups"] = [
     {
-      name: "负载均衡",
-      type: "load-balance",
-      strategy: "consistent-hashing",
-      "include-all": true,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
-    },
-    {
       name: "总策略组",
       type: "select",
       "include-all": true,
@@ -46,6 +34,18 @@ function main(config) {
         "美国策略",
         "其它地区"
       ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    },
+    {
+      name: "负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
     {
