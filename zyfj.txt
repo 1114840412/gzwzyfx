@@ -470,6 +470,7 @@ function main(config) {
     "DOMAIN-SUFFIX,biliapi.net,国内流量",
     "DOMAIN-SUFFIX,biliapi.com,国内流量",
     "DOMAIN-SUFFIX,baidu.com,国内流量",
+    "DOMAIN-KEYWORD,terabox,美国策略",
     "DOMAIN-KEYWORD,gamer520,国内流量",
     "DOMAIN-KEYWORD,sheapi,国内流量",
     "DOMAIN-KEYWORD,skidrowreloaded,国内流量",
