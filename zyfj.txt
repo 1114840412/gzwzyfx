@@ -24,6 +24,7 @@ function main(config) {
     {
       name: "总策略组",
       type: "select",
+      "include-all": true,
       proxies: [
         "故障转移",
         "自动选择",
@@ -33,10 +34,8 @@ function main(config) {
         "日本策略",
         "美国策略",
         "其它地区",
-        "手动选择",
         "负载均衡"
       ],
-      "include-all": true,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
