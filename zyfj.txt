@@ -22,6 +22,28 @@ function main(config) {
   // ========== 策略组 ==========
   config["proxy-groups"] = [
     {
+      name: "总策略组",
+      type: "select",
+      proxies: [
+        "故障转移",
+        "自动选择",
+        "手动选择",
+        "香港策略",
+        "台湾策略",
+        "狮城策略",
+        "日本策略",
+        "美国策略",
+        "其它地区",
+        "负载均衡"
+      ],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    },
+    {
       name: "故障转移",
       type: "fallback",
       "include-all": true,
@@ -39,28 +61,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
-    },
-    {
-      name: "总策略组",
-      type: "select",
-      proxies: [
-        "故障转移",
-        "自动选择",
-        "负载均衡",
-        "手动选择",
-        "香港策略",
-        "台湾策略",
-        "狮城策略",
-        "日本策略",
-        "美国策略",
-        "其它地区"
-      ],
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
     {
       name: "自动选择",
