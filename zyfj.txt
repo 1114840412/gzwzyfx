@@ -44,48 +44,6 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
     {
-      name: "故障转移",
-      type: "fallback",
-      "include-all": true,
-      proxies: [
-        "香港策略",
-        "台湾策略",
-        "狮城策略",
-        "日本策略",
-        "美国策略",
-        "其它地区"
-      ],
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
-    },
-    {
-      name: "自动选择",
-      type: "url-test",
-      "include-all": true,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
-      tolerance: 300,
-      timeout: 2000,
-      lazy: true,
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
-    },
-    {
-      name: "负载均衡",
-      type: "load-balance",
-      strategy: "consistent-hashing",
-      "include-all": true,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
-    },
-    {
       name: "手动选择",
       type: "select",
       "include-all": true,
@@ -210,6 +168,47 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png"
+    },
+    {
+      name: "故障转移",
+      type: "fallback",
+      proxies: [
+        "香港策略",
+        "台湾策略",
+        "狮城策略",
+        "日本策略",
+        "美国策略",
+        "其它地区"
+      ],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
+    },
+    {
+      name: "自动选择",
+      type: "url-test",
+      "include-all": true,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 2000,
+      lazy: true,
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
+    },
+    {
+      name: "负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
     {
       name: "下载专用",
