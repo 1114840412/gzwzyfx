@@ -22,7 +22,7 @@ function main(config) {
   // ========== 策略组 ==========
   config["proxy-groups"] = [
     {
-      name: "总策略组",
+      name: " 手动选择",
       type: "select",
       "include-all": true,
       proxies: [
@@ -41,7 +41,7 @@ function main(config) {
       timeout: 2000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+      icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Available.png"
     },
     {
       name: "香港策略",
@@ -511,7 +511,7 @@ function main(config) {
     "DOMAIN-KEYWORD,leeapk,国内流量",
     "DOMAIN-KEYWORD,cfsub,国内流量",
     "DOMAIN-KEYWORD,da.gd,国内流量",
-    "DOMAIN-KEYWORD,youtube,总策略组",
+    "DOMAIN-KEYWORD,youtube, 手动选择",
     "DOMAIN-SUFFIX,dolaai.com,DolaAI",
     "DOMAIN-SUFFIX,dola.ai,DolaAI",
     "DOMAIN-SUFFIX,cici-ai.com,DolaAI",
@@ -522,29 +522,29 @@ function main(config) {
     "RULE-SET,Advertising,广告拦截",
     "RULE-SET,Private,国内流量",
     "RULE-SET,PrivateIP,国内流量,no-resolve",
-    "RULE-SET,Speedtest,总策略组",
-    "RULE-SET,TM,总策略组",
+    "RULE-SET,Speedtest, 手动选择",
+    "RULE-SET,TM, 手动选择",
     "RULE-SET,Telegram,Telegram",
     "RULE-SET,TelegramIP,Telegram,no-resolve",
-    "RULE-SET,SocialMedia,总策略组",
-    "RULE-SET,SocialMediaIP,总策略组,no-resolve",
+    "RULE-SET,SocialMedia, 手动选择",
+    "RULE-SET,SocialMediaIP, 手动选择,no-resolve",
     "RULE-SET,AI,人工智能",
     "RULE-SET,AIIP,人工智能,no-resolve",
-    "RULE-SET,Dev,总策略组",
-    "RULE-SET,Streaming,总策略组",
-    "RULE-SET,StreamingIP,总策略组,no-resolve",
-    "RULE-SET,Games,总策略组",
+    "RULE-SET,Dev, 手动选择",
+    "RULE-SET,Streaming, 手动选择",
+    "RULE-SET,StreamingIP, 手动选择,no-resolve",
+    "RULE-SET,Games, 手动选择",
     "RULE-SET,Crypto,自动选择",
-    "RULE-SET,Google,总策略组",
-    "RULE-SET,GoogleIP,总策略组,no-resolve",
+    "RULE-SET,Google, 手动选择",
+    "RULE-SET,GoogleIP, 手动选择,no-resolve",
     "RULE-SET,Microsoft,微软服务",
-    "RULE-SET,Facebook,总策略组",
-    "RULE-SET,Apple,总策略组",
+    "RULE-SET,Facebook, 手动选择",
+    "RULE-SET,Apple, 手动选择",
     "RULE-SET,Proxy,国外流量",
     "RULE-SET,ProxyIP,国外流量,no-resolve",
     "RULE-SET,China,国内流量",
     "RULE-SET,ChinaIP,国内流量,no-resolve",
-    "MATCH,总策略组"
+    "MATCH, 手动选择"
   ];
 return config;
 }
