@@ -26,8 +26,8 @@ function main(config) {
       type: "select",
       "include-all": true,
       proxies: [
-        "故障转移",
         "自动选择",
+        "故障转移",
         "负载均衡"
       ],
       url: "http://www.gstatic.com/generate_204",
