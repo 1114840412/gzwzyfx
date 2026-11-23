@@ -124,7 +124,6 @@ function main(config) {
     {
       name: "人工智能",
       type: "fallback",
-      "include-all": true,
       proxies: [
         "美国故转",        
         "狮城故转",
@@ -142,7 +141,6 @@ function main(config) {
     {
       name: "DolaAI",
       type: "fallback",
-      "include-all": true,
       proxies: [
         "狮城故转",
         "日本故转",
@@ -159,7 +157,6 @@ function main(config) {
     {
       name: "Telegram",
       type: "fallback",
-      "include-all": true,
       proxies: [
         "香港故转",
         "台湾故转",
