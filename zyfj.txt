@@ -6,11 +6,11 @@ function main(config) {
     "^(?i)(?!.*(群|元|官|客|防|阅|群组|测试|我的|剩余|套餐|到期|续费|导航|域名|未知|频道|时间|有效|禁止|邮箱|发布|节点|中国|香港|俄罗斯|美国|美东|美西|美中|美南|美港|美日|中美|美专|邀请|返利|循环|官网|客服|网址|获取|订阅|流量|机场|下次|版本|官址|备用|过期|已用|联系|工单|贩卖|通知|倒卖|防止|国内|地址|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|🇭🇰|🇺🇸|🇷🇺|HK|US|CN|GB|Date|Day|http)).*$";
   const filterTelegram =
     "^(?i)(?!.*(俄罗斯|🇷🇺|RU)).*$";
-  const filterUrl-test =
+  const filterUrltest =
     "^(?i)(?!.*(韩|🇰🇷|KR)).*$";
   const filterFallback =
     "^(?i)(?!.*(韩|🇰🇷|KR)).*$";
-  const filterLoad-balance =
+  const filterLoadbalance =
     "^(?i)(?!.*(韩|🇰🇷|KR)).*$";
 
   // ========== 策略组 ==========
@@ -19,7 +19,7 @@ function main(config) {
       name: "自动选择",
       type: "url-test",
       "include-all": true,
-      filter: filterUrl-test,
+      filter: filterUrltest,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
       tolerance: 300,
@@ -96,7 +96,7 @@ function main(config) {
       type: "load-balance",
       strategy: "consistent-hashing",
       "include-all": true,
-      filter: filterLoad-balance,
+      filter: filterLoadbalance,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
