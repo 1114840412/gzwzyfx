@@ -125,7 +125,6 @@ function main(config) {
       name: "人工智能",
       type: "fallback",
       "include-all": true,
-      filter: filterAI,
       proxies: [
         "美国故转",        
         "狮城故转",
@@ -144,7 +143,6 @@ function main(config) {
       name: "DolaAI",
       type: "fallback",
       "include-all": true,
-      filter: filterDolaAI,
       proxies: [
         "狮城故转",
         "日本故转",
