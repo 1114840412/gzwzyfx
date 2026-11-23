@@ -203,7 +203,7 @@ function main(config) {
       timeout: 2000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/blob/master/IconSet/Color/Proxy.png"
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Proxy.png"
     },
     {
       name: "下载专用",
