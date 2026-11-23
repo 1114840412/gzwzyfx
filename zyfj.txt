@@ -124,13 +124,8 @@ function main(config) {
     {
       name: "人工智能",
       type: "fallback",
-      proxies: [
-        "美国故转",        
-        "狮城故转",
-        "日本故转",
-        "台湾故转",
-        "其它故转"
-      ],
+      "include-all": true,
+      filter: filterAI,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
@@ -141,12 +136,8 @@ function main(config) {
     {
       name: "DolaAI",
       type: "fallback",
-      proxies: [
-        "狮城故转",
-        "日本故转",
-        "台湾故转",
-        "其它故转"
-      ],
+      "include-all": true,
+      filter: filterDolaAI,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
@@ -157,14 +148,8 @@ function main(config) {
     {
       name: "Telegram",
       type: "fallback",
-      proxies: [
-        "香港故转",
-        "台湾故转",
-        "狮城故转",
-        "日本故转",
-        "美国故转",
-        "其它故转"
-      ],
+      "include-all": true,
+      filter: filterTelegram,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
@@ -175,14 +160,7 @@ function main(config) {
     {
       name: "故障转移",
       type: "fallback",
-      proxies: [
-        "香港自动",
-        "台湾自动",
-        "狮城自动",
-        "日本自动",
-        "美国自动",
-        "其它自动"
-      ],
+      "include-all": true,
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
       timeout: 2000,
