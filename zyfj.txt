@@ -30,7 +30,7 @@ function main(config) {
       filter: filterNokr,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
-      tolerance: 500,
+      tolerance: 1000,
       timeout: 2000,
       lazy: true,
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
