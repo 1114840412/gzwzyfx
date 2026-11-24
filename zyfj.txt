@@ -14,7 +14,10 @@ function main(config) {
       proxies: [
         "自动选择",
         "故障转移",
-        "负载均衡"
+        "负载均衡",
+        "人工智能",
+        "DolaAI",
+        "Telegram"
       ],
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
@@ -34,6 +37,31 @@ function main(config) {
       timeout: 2000,
       lazy: true,
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
+    },
+    {
+      name: "故障转移",
+      type: "fallback",
+      "include-all": true,
+      filter: filterNokr,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
+    },
+    {
+      name: "负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      filter: filterNokr,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 300,
+      timeout: 2000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Proxy.svg"
     },
     {
       name: "人工智能",
@@ -70,31 +98,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png"
-    },
-    {
-      name: "故障转移",
-      type: "fallback",
-      "include-all": true,
-      filter: filterNokr,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
-    },
-    {
-      name: "负载均衡",
-      type: "load-balance",
-      strategy: "consistent-hashing",
-      "include-all": true,
-      filter: filterNokr,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 300,
-      timeout: 2000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Proxy.svg"
     },
     {
       name: "下载专用",
