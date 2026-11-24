@@ -14,10 +14,7 @@ function main(config) {
       proxies: [
         "自动选择",
         "故障转移",
-        "负载均衡",
-        "人工智能",
-        "DolaAI",
-        "Telegram"
+        "负载均衡"
       ],
       url: "http://www.gstatic.com/generate_204",
       interval: 300,
