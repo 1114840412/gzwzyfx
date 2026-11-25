@@ -1,19 +1,31 @@
 function main(config) {
   // ========== 自动筛选正则 ==========
+  const filterHK = "^(?i)(?=.*(香港|港深|深港|沪港|广港|陆港|(^|[^a-zA-Z])(hk|hkg)([^a-zA-Z]|$)|hongkong|hong kong|🇭🇰))(?!.*(排除)).*$";
+  const filterTW = "^(?i)(?=.*(台湾|台北|台中|台南|台东|湾湾|(^|[^a-zA-Z])(tw|tpe|khh|tsa)([^a-zA-Z]|$)|taiwan|taipei|🇹🇼|🇼🇸))(?!.*(排除)).*$";
+  const filterJP = "^(?i)(?=.*(日本|东京|大阪|京都|神奈川|琦玉|埼玉|(^|[^a-zA-Z])(jp|nrt|hnd|kix|cts|fuk)([^a-zA-Z]|$)|japan|tokyo|🇯🇵))(?!.*(排除)).*$";
+  const filterSG = "^(?i)(?=.*(新加坡|坡县|坡|狮城|獅城|(^|[^a-zA-Z])(sg|sin|xsp)([^a-zA-Z]|$)|singapore|🇸🇬))(?!.*(排除)).*$";
+  const filterUS = "^(?i)(?=.*(美国|美东|美西|美中|美南|美港|美日|中美|美专|(^|[^a-zA-Z])(us|usa|lax|sfo|jfk|sjc)([^a-zA-Z]|$)|america|united states|🇺🇸))(?!.*(排除)).*$";
+  const filterOther = "^(?i)(?!.*(香港|新加坡|狮城|日本|美国|韩国|朝鲜|台湾|港|新|日|美|韩|台|🇭🇰|🇸🇬|🇯🇵|🇺🇸|🇰🇷|🇹🇼|(^|[^a-zA-Z])(hk|hkg|sg|sin|jp|us|kr|tw)([^a-zA-Z]|$))).+$";
   const filterAI = "^(?i)(?!.*(群|元|官|客|防|阅|群组|测试|我的|剩余|套餐|到期|续费|导航|域名|未知|频道|时间|有效|禁止|邮箱|发布|节点|中国|香港|俄罗斯|邀请|返利|循环|官网|客服|网址|获取|订阅|流量|机场|下次|版本|官址|备用|过期|已用|联系|工单|贩卖|通知|倒卖|防止|国内|地址|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|🇭🇰|🇷🇺|HK|CN|GB|Date|Day|http)).*$";
   const filterDolaAI = "^(?i)(?!.*(群|元|官|客|防|阅|群组|测试|我的|剩余|套餐|到期|续费|导航|域名|未知|频道|时间|有效|禁止|邮箱|发布|节点|中国|香港|俄罗斯|美国|美东|美西|美中|美南|美港|美日|中美|美专|邀请|返利|循环|官网|客服|网址|获取|订阅|流量|机场|下次|版本|官址|备用|过期|已用|联系|工单|贩卖|通知|倒卖|防止|国内|地址|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|🇭🇰|🇺🇸|🇷🇺|HK|US|CN|GB|Date|Day|http)).*$";
   const filterTelegram = "^(?i)(?!.*(俄罗斯|🇷🇺|RU)).*$";
   const filterNokr = "^(?i)(?!.*(韩|🇰🇷|KR)).*$";
 
-  // ========== 策略组 ==========
+  // ========== 自动组 ==========
   config["proxy-groups"] = [
     {
       name: "手动选择",
       type: "select",
       "include-all": true,
       proxies: [
-        "自动选择",
         "故障转移",
+        "自动选择",
+        "香港自动",
+        "台湾自动",
+        "狮城自动",
+        "日本自动",
+        "美国自动",
+        "其它自动",
         "负载均衡"
       ],
       url: "http://www.gstatic.com/generate_204",
@@ -24,41 +36,82 @@ function main(config) {
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Available.png"
     },
     {
-      name: "自动选择",
+      name: "香港自动",
       type: "url-test",
       "include-all": true,
-      filter: filterNokr,
+      filter: filterHK,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
-      tolerance: 1000,
-      timeout: 5000,
-      lazy: true,
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
-    },
-    {
-      name: "故障转移",
-      type: "fallback",
-      "include-all": true,
-      filter: filterNokr,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
+      tolerance: 300,
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png"
     },
     {
-      name: "负载均衡",
-      type: "load-balance",
-      strategy: "consistent-hashing",
+      name: "台湾自动",
+      type: "url-test",
       "include-all": true,
-      filter: filterNokr,
+      filter: filterTW,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
+      tolerance: 300,
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Proxy.svg"
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
+    },
+    {
+      name: "狮城自动",
+      type: "url-test",
+      "include-all": true,
+      filter: filterSG,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png"
+    },
+    {
+      name: "日本自动",
+      type: "url-test",
+      "include-all": true,
+      filter: filterJP,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png"
+    },
+    {
+      name: "美国自动",
+      type: "url-test",
+      "include-all": true,
+      filter: filterUS,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png"
+    },
+    {
+      name: "其它自动",
+      type: "url-test",
+      "include-all": true,
+      filter: filterOther,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     },
     {
       name: "人工智能",
@@ -95,6 +148,48 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png"
+    },
+    {
+      name: "故障转移",
+      type: "fallback",
+      proxies: [
+        "香港自动",
+        "台湾自动",
+        "狮城自动",
+        "日本自动",
+        "美国自动",
+        "其它自动"
+      ],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
+    },
+    {
+      name: "自动选择",
+      type: "url-test",
+      "include-all": true,
+      filter: filterNokr,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 5000,
+      lazy: true,
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
+    },
+    {
+      name: "负载均衡",
+      type: "load-balance",
+      strategy: "consistent-hashing",
+      "include-all": true,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Proxy.svg"
     },
     {
       name: "下载专用",
@@ -140,6 +235,78 @@ function main(config) {
         "负载均衡"
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+    },
+    {
+      name: "香港故转",
+      type: "fallback",
+      "include-all": true,
+      filter: filterHK,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Hong_Kong.png"
+    },
+    {
+      name: "台湾故转",
+      type: "fallback",
+      "include-all": true,
+      filter: filterTW,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Taiwan.png"
+    },
+    {
+      name: "狮城故转",
+      type: "fallback",
+      "include-all": true,
+      filter: filterSG,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png"
+    },
+    {
+      name: "日本故转",
+      type: "fallback",
+      "include-all": true,
+      filter: filterJP,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png"
+    },
+    {
+      name: "美国故转",
+      type: "fallback",
+      "include-all": true,
+      filter: filterUS,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png"
+    },
+    {
+      name: "其它故转",
+      type: "fallback",
+      "include-all": true,
+      filter: filterOther,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     }
   ];
 
@@ -164,7 +331,6 @@ function main(config) {
       "+.ciciapp.com"
     ]
   };
-  
   config.sniffer = {
     enable: true,
     sniff: {
@@ -174,7 +340,6 @@ function main(config) {
     },
     "skip-domain": ["Mijia Cloud", "+.push.apple.com"]
   };
-  
   config.tun = {
     enable: false,
     stack: "mixed",
@@ -192,7 +357,6 @@ function main(config) {
     interval: 86400,
     url
   });
-  
   const ipProvider = (url) => ({
     type: "http",
     behavior: "ipcidr",
@@ -200,9 +364,7 @@ function main(config) {
     interval: 86400,
     url
   });
-  
   const base = "https://github.com/666OS/rules/raw/release/mihomo/";
-  
   config["rule-providers"] = {
     Tracking: domainProvider(base + "domain/Tracking.mrs"),
     Advertising: domainProvider(base + "domain/Advertising.mrs"),
@@ -239,7 +401,7 @@ function main(config) {
     GoogleIP: ipProvider(base + "ip/Google.mrs")
   };
 
-  // ========== 规则区 ==========
+  // ========== 规则区 ✅ 关键修复：最后一行无逗号，无多余符号 ==========
   config.rules = [
     "DOMAIN-SUFFIX,music.163.com,国内流量",
     "DOMAIN-SUFFIX,music.126.net,国内流量",
@@ -348,6 +510,5 @@ function main(config) {
     "RULE-SET,ChinaIP,国内流量,no-resolve",
     "MATCH,手动选择"
   ];
-  
-  return config;
+return config;
 }
