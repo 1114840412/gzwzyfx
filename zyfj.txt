@@ -27,6 +27,9 @@ function main(config) {
         "日本自动",
         "美国自动",
         "其它自动",
+        "人工智能",
+        "DolaAI",
+        "Telegram",
         "负载均衡"
       ],
       url: "http://www.gstatic.com/generate_204",
