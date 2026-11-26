@@ -255,11 +255,12 @@ function main(config) {
     },
     {
       name: "电报飞机",
-      type: "fallback",
+      type: "url-test",
       "include-all": true,
       filter: filterTelegram,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
+      tolerance: 300,
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
