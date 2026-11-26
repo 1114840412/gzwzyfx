@@ -21,6 +21,22 @@ function main(config) {
         "故障转移",
         "自动选择",
         "手动选择",
+        "人工智能",
+        "豆包国际",
+        "电报飞机"
+      ],
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Available.png"
+    },
+    {
+      name: "手动选择",
+      type: "select",
+      "include-all": true,
+      proxies: [
         "香港故转",
         "狮城故转",
         "美国故转",
@@ -32,17 +48,14 @@ function main(config) {
         "狮城自动",
         "日本自动",
         "美国自动",
-        "家宽自动",
-        "人工智能",
-        "豆包国际",
-        "电报飞机"
+        "家宽自动"
       ],
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Available.png"
+      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"
     },
     {
       name: "故障转移",
@@ -67,17 +80,6 @@ function main(config) {
       timeout: 5000,
       lazy: true,
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
-    },
-    {
-      name: "手动选择",
-      type: "select",
-      "include-all": true,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
-      timeout: 5000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"
     },
     {
       name: "香港故转",
