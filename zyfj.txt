@@ -18,8 +18,8 @@ function main(config) {
       name: "总策略组",
       type: "select",
       proxies: [
-        "故障转移",
         "自动选择",
+        "故障转移",
         "手动选择",
         "人工智能",
         "豆包国际",
@@ -56,18 +56,6 @@ function main(config) {
       icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"
     },
     {
-      name: "故障转移",
-      type: "fallback",
-      "include-all": true,
-      filter: filterNokr,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
-      timeout: 5000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
-    },
-    {
       name: "自动选择",
       type: "url-test",
       "include-all": true,
@@ -78,6 +66,18 @@ function main(config) {
       timeout: 5000,
       lazy: true,
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
+    },
+    {
+      name: "故障转移",
+      type: "fallback",
+      "include-all": true,
+      filter: filterNokr,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/ULB.png"
     },
     {
       name: "香港故转",
