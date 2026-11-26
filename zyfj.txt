@@ -17,7 +17,6 @@ function main(config) {
     {
       name: "总策略组",
       type: "select",
-      "include-all": true,
       proxies: [
         "故障转移",
         "自动选择",
@@ -151,7 +150,7 @@ function main(config) {
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Home.svg"
     },
     {
       name: "香港自动",
@@ -229,7 +228,7 @@ function main(config) {
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
+      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Home.svg"
     },
     {
       name: "人工智能",
