@@ -15,11 +15,11 @@ function main(config) {
   // ========== 自动组 ==========
   config["proxy-groups"] = [
     {
-      name: "总策略组",
+      name: "手动选择",
       type: "select",
+      "include-all": true,
       proxies: [
         "自动选择",
-        "手动选择",
         "香港自动",
         "狮城自动",
         "美国自动",
@@ -35,17 +35,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Available.png"
-    },
-    {
-      name: "手动选择",
-      type: "select",
-      "include-all": true,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
-      timeout: 5000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Round_Robin.png"
     },
     {
       name: "自动选择",
@@ -215,7 +204,7 @@ function main(config) {
       type: "select",
       proxies: [
         "DIRECT",
-        "总策略组"
+        "手动选择"
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png"
     },
@@ -223,7 +212,7 @@ function main(config) {
       name: "国外流量",
       type: "select",
       proxies: [
-        "总策略组"
+        "手动选择"
       ],
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Global.png"
     }
@@ -394,7 +383,7 @@ function main(config) {
     "DOMAIN-KEYWORD,leeapk,国内流量",
     "DOMAIN-KEYWORD,cfsub,国内流量",
     "DOMAIN-KEYWORD,da.gd,国内流量",
-    "DOMAIN-KEYWORD,youtube,总策略组",
+    "DOMAIN-KEYWORD,youtube,手动选择",
     "DOMAIN-SUFFIX,dolaai.com,豆包国际",
     "DOMAIN-SUFFIX,dola.ai,豆包国际",
     "DOMAIN-SUFFIX,cici-ai.com,豆包国际",
@@ -405,29 +394,29 @@ function main(config) {
     "RULE-SET,Advertising,广告拦截",
     "RULE-SET,Private,国内流量",
     "RULE-SET,PrivateIP,国内流量,no-resolve",
-    "RULE-SET,Speedtest,总策略组",
-    "RULE-SET,TM,总策略组",
+    "RULE-SET,Speedtest,手动选择",
+    "RULE-SET,TM,手动选择",
     "RULE-SET,Telegram,电报飞机",
     "RULE-SET,TelegramIP,电报飞机,no-resolve",
-    "RULE-SET,SocialMedia,总策略组",
-    "RULE-SET,SocialMediaIP,总策略组,no-resolve",
+    "RULE-SET,SocialMedia,手动选择",
+    "RULE-SET,SocialMediaIP,手动选择,no-resolve",
     "RULE-SET,AI,人工智能",
     "RULE-SET,AIIP,人工智能,no-resolve",
-    "RULE-SET,Dev,总策略组",
-    "RULE-SET,Streaming,总策略组",
-    "RULE-SET,StreamingIP,总策略组,no-resolve",
-    "RULE-SET,Games,总策略组",
+    "RULE-SET,Dev,手动选择",
+    "RULE-SET,Streaming,手动选择",
+    "RULE-SET,StreamingIP,手动选择,no-resolve",
+    "RULE-SET,Games,手动选择",
     "RULE-SET,Crypto,自动选择",
-    "RULE-SET,Google,总策略组",
-    "RULE-SET,GoogleIP,总策略组,no-resolve",
+    "RULE-SET,Google,手动选择",
+    "RULE-SET,GoogleIP,手动选择,no-resolve",
     "RULE-SET,Microsoft,微软服务",
-    "RULE-SET,Facebook,总策略组",
-    "RULE-SET,Apple,总策略组",
+    "RULE-SET,Facebook,手动选择",
+    "RULE-SET,Apple,手动选择",
     "RULE-SET,Proxy,国外流量",
     "RULE-SET,ProxyIP,国外流量,no-resolve",
     "RULE-SET,China,国内流量",
     "RULE-SET,ChinaIP,国内流量,no-resolve",
-    "MATCH,总策略组"
+    "MATCH,手动选择"
   ];
 return config;
 }
