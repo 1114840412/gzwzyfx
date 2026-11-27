@@ -20,12 +20,12 @@ function main(config) {
       "include-all": true,
       proxies: [
         "自动选择",
+        "家宽自动",
         "香港自动",
         "台湾自动",
         "狮城自动",
         "美国自动",
         "日本自动",
-        "家宽自动",
         "人工智能",
         "豆包国际",
         "电报飞机"
@@ -48,6 +48,19 @@ function main(config) {
       timeout: 5000,
       lazy: true,
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Auto.png"
+    },
+    {
+      name: "家宽自动",
+      type: "url-test",
+      "include-all": true,
+      filter: filterJK,
+      url: "http://www.gstatic.com/generate_204",
+      interval: 1800,
+      tolerance: 300,
+      timeout: 5000,
+      lazy: true,
+      "empty-fallback": "REJECT",
+      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Home.svg"
     },
     {
       name: "香港自动",
@@ -113,19 +126,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/United_States.png"
-    },
-    {
-      name: "家宽自动",
-      type: "url-test",
-      "include-all": true,
-      filter: filterJK,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
-      tolerance: 300,
-      timeout: 5000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Home.svg"
     },
     {
       name: "人工智能",
