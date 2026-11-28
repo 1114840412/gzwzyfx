@@ -1,8 +1,7 @@
 function main(config) {
   // ========== 自动筛选正则 ==========
   const filterCN = "^(?i)(?=.*(香港|港深|深港|沪港|广港|陆港|澳门|台湾|台北|台中|台南|台东|湾湾|(^|[^a-zA-Z])(hk|hkg|mac|tw|tpe|khh|tsa)([^a-zA-Z]|$)|hongkong|hong kong|🇭🇰|🇲🇴|taiwan|taipei|🇹🇼|🇼🇸))(?!.*(排除)).*$";
-  const filterJP = "^(?i)(?=.*(日本|东京|大阪|京都|神奈川|琦玉|埼玉|(^|[^a-zA-Z])(jp|nrt|hnd|kix|cts|fuk)([^a-zA-Z]|$)|japan|tokyo|🇯🇵))(?!.*(排除)).*$";
-  const filterSG = "^(?i)(?=.*(新加坡|坡县|坡|狮城|獅城|(^|[^a-zA-Z])(sg|sin|xsp)([^a-zA-Z]|$)|singapore|🇸🇬))(?!.*(排除)).*$";
+  const filterSGJP = "^(?i)(?=.*(新加坡|坡县|坡|狮城|獅城|日本|东京|大阪|京都|神奈川|琦玉|埼玉|(^|[^a-zA-Z])(sg|sin|xsp|jp|nrt|hnd|kix|cts|fuk)([^a-zA-Z]|$)|singapore|🇸🇬|japan|tokyo|🇯🇵))(?!.*(排除)).*$";
   const filterUS = "^(?i)(?=.*(美国|美东|美西|美中|美南|美港|美日|中美|美专|(^|[^a-zA-Z])(us|usa|lax|sfo|jfk|sjc)([^a-zA-Z]|$)|america|united states|🇺🇸))(?!.*(排除)).*$";
   const filterOther = "^(?i)(?!.*(香港|澳门|新加坡|狮城|日本|美国|韩国|朝鲜|台湾|港|新|日|美|韩|台|🇭🇰|🇲🇴|🇸🇬|🇯🇵|🇺🇸|🇰🇷|🇹🇼|(^|[^a-zA-Z])(hk|hkg|mac|sg|sin|jp|us|kr|tw)([^a-zA-Z]|$))).+$";
   const filterJK = "^(?i)(?=.*(家)([^a-zA-Z]|$))(?!.*(排除)).*$";
@@ -21,9 +20,8 @@ function main(config) {
         "自动选择",
         "家宽自动",
         "中国自动",
-        "狮城自动",
+        "新日自动",
         "美国自动",
-        "日本自动",
         "其它自动",
         "人工智能",
         "豆包国际",
@@ -75,10 +73,10 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png"
     },
     {
-      name: "狮城自动",
+      name: "新日自动",
       type: "url-test",
       "include-all": true,
-      filter: filterSG,
+      filter: filterSGJP,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
       tolerance: 300,
@@ -86,19 +84,6 @@ function main(config) {
       lazy: true,
       "empty-fallback": "REJECT",
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Singapore.png"
-    },
-    {
-      name: "日本自动",
-      type: "url-test",
-      "include-all": true,
-      filter: filterJP,
-      url: "http://www.gstatic.com/generate_204",
-      interval: 1800,
-      tolerance: 300,
-      timeout: 5000,
-      lazy: true,
-      "empty-fallback": "REJECT",
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Japan.png"
     },
     {
       name: "美国自动",
