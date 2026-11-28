@@ -113,11 +113,12 @@ function main(config) {
     },
     {
       name: "人工智能",
-      type: "fallback",
+      type: "url-test",
       "include-all": true,
       filter: filterAI,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
+      tolerance: 300,
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
@@ -125,11 +126,12 @@ function main(config) {
     },
     {
       name: "豆包国际",
-      type: "fallback",
+      type: "url-test",
       "include-all": true,
       filter: filterDolaAI,
       url: "http://www.gstatic.com/generate_204",
       interval: 1800,
+      tolerance: 300,
       timeout: 5000,
       lazy: true,
       "empty-fallback": "REJECT",
@@ -173,10 +175,13 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Download.png"
     },
     {
-      name: "国内流量",
+      name: "微软服务",
       type: "select",
-      proxies: ["DIRECT"],
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png"
+      proxies: [
+        "DIRECT",
+        "手动选择"
+      ],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png"
     },
     {
       name: "广告拦截",
@@ -185,13 +190,10 @@ function main(config) {
       icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Reject.png"
     },
     {
-      name: "微软服务",
+      name: "国内流量",
       type: "select",
-      proxies: [
-        "DIRECT",
-        "手动选择"
-      ],
-      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/Microsoft.png"
+      proxies: ["DIRECT"],
+      icon: "https://github.com/Koolson/Qure/raw/master/IconSet/Color/China.png"
     },
     {
       name: "国外流量",
