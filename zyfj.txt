@@ -62,7 +62,7 @@ function main(config) {
       icon: "https://cdn.jsdelivr.net/gh/appshubcc/Qure_Style_SVG@main/icon/svg/common/Home.svg"
     },
     {
-      name: "香港自动",
+      name: "港台自动",
       type: "url-test",
       "include-all": true,
       filter: filterCN,
